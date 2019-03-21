@@ -83,5 +83,5 @@ Lastly, to close everything, you have to both stop the job running on the cluste
 ### Notes
 * Feel free to play around with the requested resources in [jupyter.job](jupyter.job) (e.g. number of cpus, max runtime, etc.). 
 
-# Good luck!
+## Good luck!
 Feel free to reach out to me at <mho1@andrew.cmu.edu> if you have any questions.
