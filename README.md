@@ -13,7 +13,7 @@ Below are my instructions for easy and fast implementation of jupyter notebooks 
     ```console
     user@server:~$ jupyter notebook password
     ```
-4. Modify the configuration file located at `~/.jupyter/jupyter_notebook_config.py` and un-comment and change the following lines. They are not necessarily put in order, so you might need to search through the config file.
+4. Modify the configuration file located at `~/.jupyter/jupyter_notebook_config.py` and un-comment and change the following lines. You'll need to search through the config file to find each line.
     ```python
     c.NotebookApp.open_browser = False
     c.NotebookApp.port = 8888 # (You can set this to any four-digit integer)
@@ -78,7 +78,7 @@ Finally, you should be able to access your jupyter server on a local browser. In
 ### Exiting
 Lastly, to close everything, you have to both stop the job running on the cluster and also kill the bridge connecting you to the cluster. 
 * To stop the jupyter job, you can either click 'Quit' in the Jupyter Dashboard or `scancel` the `JOBID` of your jupyter process.
-* To close the ssh bridge, you can simply pass `SIGINT` (Ctrl-C) the running bridge in your local terminal.
+* To close the ssh bridge, you can simply pass `SIGINT` (Ctrl-C) to the running bridge in your local terminal.
 
 ### Notes
 * Feel free to play around with the requested resources in [jupyter.job](jupyter.job) (e.g. number of cpus, max runtime, etc.). 
