@@ -16,7 +16,7 @@ Below are my instructions for easy and fast implementation of jupyter notebooks 
 4. Modify the configuration file located at `~/.jupyter/jupyter_notebook_config.py` and un-comment and change the following lines. They are not necessarily put in order, so you might need to search through the config file.
     ```python
     c.NotebookApp.open_browser = False
-    c.NotebookApp.port = 8888 (You can set this to any four-digit integer)
+    c.NotebookApp.port = 8888 # (You can set this to any four-digit integer)
     ```
     Choose a 4-digit port number other than `8888` to avoid overlapping with another user's jupyter instance
 
