@@ -1,8 +1,10 @@
 # slurm_jupyter
 
-Below are my instructions for easy and fast implementation of jupyter notebooks on a SLURM cluster over SSH. These instructions are built for ready use on the Vera computing cluster (PSC-McWilliams Center), but can be generalized to any computing cluster that uses recent versions off SLURM.
+Below are my instructions for easy and fast implementation of jupyter notebooks on a SLURM cluster over SSH. These instructions are built for ready use on the Vera computing cluster (PSC-McWilliams Center), but can be generalized to any computing cluster that uses a recent version of SLURM.
 
-There are two ways to run a jupyter notebook on a remote SLURM cluster: on a login node or on a compute node. The compute node instance gives you full access to the cluster's computational resources, but is slightly more difficult to set up. The compute node method also wastes resources when idle, but excessive login node usage can also clog up other users' access to the system. You should use the login node method when doing simple, resource-light computation (e.g. data transfer/exploration, plot generation, etc.) and the compute node method for doing high memory or extended computation (e.g. model fitting, simulation, etc.). Please be conscientious of your use.
+There are two ways to run a jupyter notebook on a remote SLURM cluster: on a login node or on a compute node. The compute node instance gives you full access to the cluster's computational resources, but is slightly more difficult to set up than the login node method. 
+
+Each method has its drawbacks: Heavy computation on a login node will clog up other users' access to the system, while the compute node method will waste resources when idle. You should use the login node method when doing simple, resource-light computation (e.g. data transfer/exploration, plot generation, etc.) and the compute node method for doing high memory or extended computation (e.g. model fitting, simulation, etc.). Please be conscientious of your use.
 
 ## Jupyter on a login node
 ### Setup
@@ -41,9 +43,9 @@ You can end the jupyter instance and the `ssh` bridge by either clicking 'Quit' 
 Here are some miscellaneous notes on running on a login node:
  * If you run into a "bash: jupyter: command not found" error, you have to replace the `"jupyter notebook"` command with the location of the jupyter binary in the server directories. You can find it using `which jupyter`.
  * If you're comfortable with leaving jupyter running indefinitely in the background on your server, remove the -t flag and add the -f flag. This forks the process to the background. Just know that, in order to shut down the server, you'll need to find the process ID and kill it manually. [Here's a stack overflow with how to do this.](https://stackoverflow.com/questions/9447226/how-to-close-this-ssh-tunnel)
- * You can wrap the long `ssh` command inside a simple bash script so you don't have to type it up every time. I've included my example in this repo as [vera_login.sh](vera_login.sh). This is run with 
+ * You can wrap the long `ssh` command inside a simple bash script so you don't have to type it up every time. I've included my example in this repo as [vera_login.sh](vera_login.sh). This is run with:
     ```console
-    user@local:~$ sh vera_login.sh.
+    user@local:~$ sh vera_login.sh
     ```
  * This procedure can be modified to run a [JupyterLab server](https://jupyterlab.readthedocs.io/en/stable/) instead of just Jupyter notebooks. To do so, simply replace `jupyter notebook` with `jupyter lab` in the above `ssh` command.
 
@@ -55,7 +57,7 @@ This procedure is built off of this tutorial: http://docs.ycrc.yale.edu/clusters
 ### Setup
 1. Follow __Setup__ steps from __Jupyter on a login node__
 2. Copy [jupyter.job](jupyter.job) into your veera home directory `~`. This contains all the information necessary for the SLURM scheduler to run your jupyter instance.
-3. Change the output-error directory to a desired (junk) folder (lines 6 and 7 in [jupyter.job](jupyter.job)).  Here, Jupyter will dump text files containing all the typical stuff that would be printed to terminal.
+3. Change the output-error directory to a desired (junk) folder (lines 6 and 7 in [jupyter.job](jupyter.job)).  Here, Jupyter will dump text files containing all the typical stuff that would otherwise be printed to terminal.
 4. Change the desired `<port>` to the one chosen in the setup (line 11 in [jupyter.job](jupyter.job)).
 
 ### Running
@@ -76,7 +78,7 @@ This procedure is built off of this tutorial: http://docs.ycrc.yale.edu/clusters
     This forms a continuously running 'bridge' between your terminal and the compute node running your jupyter notebook. 
     
 ### Access
-Finally, you should be able to access your jupyter server on a local browser. In your browser, navigate to ```http://localhost:<port>```.
+Finally, you should be able to access your jupyter server on a local web browser. In your browser, navigate to ```http://localhost:<port>```.
 
 ### Exiting
 Lastly, to close everything, you have to both stop the job running on the cluster and also kill the bridge connecting you to the cluster. 
