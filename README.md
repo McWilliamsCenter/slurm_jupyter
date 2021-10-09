@@ -88,6 +88,7 @@ Lastly, to close everything, you have to both stop the job running on the cluste
 ### Notes
 * Feel free to play around with the requested resources in [jupyter.job](jupyter.job) (e.g. number of cpus, max runtime, etc.). 
 * Like in __Jupyter on a login node__, you can also wrap the ssh command in a simple bash script. An example is presented in [vera_compute.sh](vera_compute.sh).
+* I've also included [jupyter_gpu.job](jupyter_gpu.job) to demonstrate how to extend this analysis to run on a GPU node (like twig on vera). 
 
 ## Good luck!
 Feel free to reach out to me at <mho1@andrew.cmu.edu> if you have any questions.
